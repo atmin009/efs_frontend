@@ -1,0 +1,14 @@
+.footer {
+    background-color: #4D0067; /* สีพื้นหลังของ Footer */
+    color: #ffffff; /* สีตัวอักษรใน Footer */
+  }
+  
+  .footer a {
+    color: #ffffff; /* สีของลิงก์ใน Footer */
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline; /* ขีดเส้นใต้ลิงก์เมื่อ hover */
+  }
+  

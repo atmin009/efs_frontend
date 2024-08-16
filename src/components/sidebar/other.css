@@ -1,0 +1,47 @@
+.custom-sidebar {
+    position: absolute;
+    top: 60px; /* ระยะห่างจากด้านบนเท่ากับความสูงของแถบสีม่วง */
+    left: 0;
+    bottom: 0;
+    width: 250px; /* กำหนดความกว้างของ Sidebar */
+    background-color: #e1bee7    !important; /* เปลี่ยนสีพื้นหลัง Sidebar */
+    color: #ffffff !important; /* เปลี่ยนสีตัวอักษรใน Sidebar */
+    padding: 20px;
+    z-index: 1000; /* นำ Sidebar ไว้บนสุด */
+    font-family: 'Anuphan';
+    border-right: 2px solid #7A009F; /* เพิ่มเส้นขอบด้านขวา */
+}
+
+.custom-sidebar .nav-link {
+    color: #030303 !important; /* สีตัวอักษรปกติ */
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.526); /* เพิ่มพื้นหลังโปร่งใส */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.custom-sidebar .nav-link:hover {
+    background-color: #7A009F !important; /* สีพื้นหลังเมื่อ Hover */
+    color: #ffffff !important; /* สีตัวอักษรเมื่อ Hover */
+}
+
+.custom-sidebar .nav-link.active {
+    background-color: #620080 !important; /* สีพื้นหลังของปุ่มที่ active */
+    color: #ffffff !important; /* สีตัวอักษรของปุ่มที่ active */
+}
+
+.custom-sidebar .nav-link:not(:last-child) {
+    border-bottom: 1px solid #7A009F; /* เส้นคั่นระหว่างปุ่ม */
+    margin-bottom: 10px;
+}
+
+.custom-sidebar .nav-link.active::before {
+    content: "•";
+    color: #fff;
+    margin-right: 8px;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}

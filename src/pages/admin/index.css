@@ -1,0 +1,85 @@
+/* OtherPage.css */
+
+/* Hide the sidebar in mobile view */
+@media (max-width: 768px) {
+    .navbar-mobile {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .content-area {
+      margin-top: 20px;
+      padding: 20px;
+    }
+  
+    .d-none {
+      display: none !important;
+    }
+  }
+  
+
+  
+  .custom-sidebar .nav-link {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* เพิ่มเอฟเฟกต์การเปลี่ยนแปลงเมื่อ Hover */
+  }
+  
+  .custom-sidebar .nav-link:hover {
+    background-color: #7A009F !important; /* สีพื้นหลังเมื่อ Hover */
+    color: #ffffff !important; /* สีตัวอักษรเมื่อ Hover */
+  }
+  
+  .custom-sidebar .nav-link.active {
+    background-color: #620080 !important; /* สีพื้นหลังของปุ่มที่ active */
+    color: #ffffff !important; /* สีตัวอักษรของปุ่มที่ active */
+  }
+  
+
+  .content-area {
+    margin-left: 250px; /* กำหนดขนาดให้ตรงกับความกว้างของ Sidebar */
+    padding: 20px; /* เพิ่ม padding เพื่อให้เนื้อหาดูมีช่องว่าง */
+    flex-grow: 1; /* เพิ่ม flex-grow เพื่อให้ content-area ขยายเต็มที่ */
+  }
+  
+  @media (max-width: 768px) {
+    .content-area {
+      margin-left: 0; /* ยกเลิก margin-left ในโหมดมือถือ */
+      padding: 10px 0px; /* ปรับ padding บน-ล่างเป็น 10px เพื่อลดความห่าง */
+      width: 100%; /* ให้ content-area ครอบคลุมเต็มพื้นที่ */
+    }
+  
+    .custom-sidebar {
+      display: none; /* ซ่อน Sidebar ในโหมดมือถือ */
+    }
+  }
+  
+  
+  /* เพิ่มสไตล์สำหรับการจัดการ Layout ทั้งหมด */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ให้ความสูงขั้นต่ำเป็น 100% ของหน้าจอ */
+}
+
+.content-wrap {
+  flex: 1;
+}
+
+/* ปรับปรุงการจัดวางของ Footer */
+.footer {
+    margin-left: 250px;
+  background-color: #4D0067 !important;
+  color: #ffffff;
+  padding: 3px 0;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .footer {
+      margin-left: 0; /* ยกเลิก margin-left ในโหมดมือถือ */
+      width: 100%; /* ให้ content-area ครอบคลุมเต็มพื้นที่ */
+    }
+  }

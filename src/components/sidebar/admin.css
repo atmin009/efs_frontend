@@ -1,0 +1,51 @@
+.custom-sidebar {
+    position: fixed; /* ยึด Sidebar ให้ติดกับหน้าจอ */
+    top: 0; /* ตั้งค่าระยะห่างจากด้านบนของหน้าจอเป็น 0 */
+    left: 0;
+    width: 250px; /* กำหนดความกว้างของ Sidebar */
+    background-color: #e1bee7 !important; /* เปลี่ยนสีพื้นหลัง Sidebar */
+    color: #ffffff !important; /* เปลี่ยนสีตัวอักษรใน Sidebar */
+    padding: 80px 20px 20px 20px; /* เพิ่ม padding ด้านบนเพื่อเว้นระยะจากแถบด้านบน */
+    z-index: 1000; /* นำ Sidebar ไว้บนสุด */
+    font-family: 'Anuphan';
+    border-right: 2px solid #7A009F; /* เพิ่มเส้นขอบด้านขวา */
+    height: 100vh; /* ใช้ความสูงเต็มหน้าจอ */
+    overflow-y: auto; /* เพิ่มการ scroll เมื่อ Sidebar ยาวเกินหน้าจอ */
+}
+
+.custom-sidebar .nav-link {
+    color: #030303 !important; /* สีตัวอักษรปกติ */
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.526); /* เพิ่มพื้นหลังโปร่งใส */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    text-decoration: none;
+}
+
+.custom-sidebar .nav-link:hover {
+    background-color: #7A009F !important; /* สีพื้นหลังเมื่อ Hover */
+    color: #ffffff !important; /* สีตัวอักษรเมื่อ Hover */
+}
+
+.custom-sidebar .nav-link.active {
+    background-color: #620080 !important; /* สีพื้นหลังของปุ่มที่ active */
+    color: #ffffff !important; /* สีตัวอักษรของปุ่มที่ active */
+}
+
+.custom-sidebar .nav-link:not(:last-child) {
+    border-bottom: 1px solid #7A009F; /* เส้นคั่นระหว่างปุ่ม */
+    margin-bottom: 10px;
+}
+
+.custom-sidebar .nav-item .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}

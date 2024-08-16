@@ -1,0 +1,15 @@
+/* sidebar.css */
+.sidebar {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .menu-item {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .menu-item:hover {
+    background-color: #495057;
+  }
+  
