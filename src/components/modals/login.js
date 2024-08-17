@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function LoginModal({ lnShow, loginShow }) {
   const [formData, setFormData] = useState({
@@ -7,12 +9,19 @@ function LoginModal({ lnShow, loginShow }) {
     password: '',
   });
   const [loginError, setLoginError] = useState(null);
+  const navigate = useNavigate();
+  
+  // ใช้ useContext ในการดึง authContext
+  const authContext = useContext(AuthContext);
+  const setAuth = authContext ? authContext.setAuth : () => {};
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleLogin = async () => {
+    console.log('Form data being sent:', formData); // ตรวจสอบข้อมูลที่ส่งไปยังเซิร์ฟเวอร์
+  
     try {
       const response = await fetch('http://127.0.0.1:8000/login/', {
         method: 'POST',
@@ -21,37 +30,47 @@ function LoginModal({ lnShow, loginShow }) {
         },
         body: JSON.stringify(formData),
       });
-
+  
+      console.log('Server response status:', response.status); // แสดงสถานะการตอบสนอง
+  
       if (response.ok) {
         const data = await response.json();
-        const userStatus = data.status;
-
-        // ตรวจสอบสถานะและเปลี่ยนหน้าไปยังไฟล์ต่างๆ
-        switch (userStatus) {
+        const { user_id, username, status, name } = data;
+      
+        // อัปเดต AuthContext
+        setAuth({ isLoggedIn: true, user: { user_id, username, status, name } });
+        localStorage.setItem('user', JSON.stringify({ user_id, username, status, name }));
+        loginShow(false);
+      
+        // เปลี่ยนเส้นทางตาม status
+        switch (status) {
           case 0:
-            window.location.href = '../../pages/admin';
+            navigate('/admin');
             break;
           case 1:
-            window.location.href = '../../pages/employee';
+            navigate('/employee');
             break;
           case 2:
-            window.location.href = '../../pages/ceo';
+            navigate('/ceo');
             break;
           case 3:
-            window.location.href = '../../pages/other';
+            navigate('/other');
             break;
           default:
             setLoginError('สถานะผู้ใช้ไม่ถูกต้อง');
             break;
-        }
+        }          
       } else {
         const errorData = await response.json();
+        console.error('Error response from server:', errorData); // แสดงข้อมูล error ที่เซิร์ฟเวอร์ตอบกลับมา
         setLoginError(errorData.detail || 'การเข้าสู่ระบบล้มเหลว');
       }
     } catch (error) {
+      console.error('Error during login:', error); // แสดงข้อผิดพลาดที่เกิดขึ้นในขณะทำการ login
       setLoginError('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
     }
   };
+  
 
   return (
     <Modal
