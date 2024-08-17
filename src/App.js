@@ -1,11 +1,12 @@
 import React from 'react';
-import HomePage from './pages/index'; // ตรวจสอบเส้นทางให้ถูกต้อง
-import './index.css';
+import { AuthProvider } from './contexts/AuthContext';
+import AppRouter from './Router';
+
 function App() {
   return (
-    <div className="App">
-      <HomePage />
-    </div>
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
   );
 }
 
