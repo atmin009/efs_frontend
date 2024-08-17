@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import CollapsibleExample from '../components/navmenu'; 
 import UncontrolledExample from '../components/cover'; 
-import LoginModal from '../components/modals/login'; // แก้ไขการ import ชื่อซ้ำ
+import LoginModal from '../components/modals/login';
 
 const HomePage = () => {
-  const [lnShow, setLnShow] = useState(false); // สำหรับ LoginModal
+  const [lnShow, setLnShow] = useState(false);
 
   return (
     <div>
       <CollapsibleExample 
-        loginShow={setLnShow} // ส่ง loginShow เป็น prop ไปยัง CollapsibleExample
+        loginShow={setLnShow} 
       />
       <UncontrolledExample />
-      <LoginModal lnShow={lnShow} loginShow={setLnShow} /> {/* เพิ่ม LoginModal */}
+      <LoginModal lnShow={lnShow} loginShow={setLnShow} /> 
     </div>
   );
 };
