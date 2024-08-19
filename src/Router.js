@@ -8,6 +8,7 @@ import OtherPage from "./pages/other/index";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import RegisterPage from "./pages/register";
+import AdminPredictPage from "./pages/admin/predict";
 
 function AppRouter() {
   return (
@@ -25,6 +26,15 @@ function AppRouter() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin/predict"
+          element={
+            <ProtectedRoute allowedStatus={[0]}>
+              <AdminPredictPage />
+            </ProtectedRoute>
+          }
+        />
+
 
         <Route
           path="/employee"
