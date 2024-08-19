@@ -45,3 +45,37 @@
     /* ให้ content-area ครอบคลุมเต็มพื้นที่ */
   }
 }
+
+/* ปรับการแสดงผลในหน้าจอขนาดเล็กและแท็บเล็ต */
+@media (max-width: 1024px) {
+  .custom-navbar .navbar-collapse {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .custom-navbar .navbar-collapse .nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .custom-navbar .nav span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px; /* ลดขนาดพื้นที่แสดงชื่อผู้ใช้ */
+    margin-right: 5px; /* ลดช่องว่างระหว่างชื่อกับไอคอนฟันเฟือง */
+    font-size: 14px; /* ลดขนาดตัวอักษร */
+  }
+
+  .custom-navbar .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    margin-left: 5px; /* ลดช่องว่างระหว่างชื่อผู้ใช้กับไอคอน */
+  }
+}
