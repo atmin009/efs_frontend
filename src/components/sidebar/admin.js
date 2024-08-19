@@ -54,7 +54,12 @@ const AdminSidebar = ({ show, handleClose, handleShow }) => {
             <FaUserCog style={{ marginRight: "8px" }} />
             จัดการผู้ใช้งานระบบ
           </Nav.Link>
+
         </Nav>
+        <div className="text-center mt-4" style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+  <img src="/et1.png" alt="ET1" style={{ width: "100%" }} />
+</div>
+
       </div>
 
       {/* Offcanvas สำหรับโหมดมือถือ */}
@@ -94,6 +99,7 @@ const AdminSidebar = ({ show, handleClose, handleShow }) => {
               <FaUserCog style={{ marginRight: "8px" }} />
               จัดการผู้ใช้งานระบบ
             </Nav.Link>
+
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>

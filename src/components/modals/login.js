@@ -9,6 +9,7 @@ function LoginModal({ lnShow, loginShow }) {
     password: '',
   });
   const [loginError, setLoginError] = useState(null);
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState(''); // เพิ่มสถานะสำหรับอีเมลลืมรหัสผ่าน
   const navigate = useNavigate();
   
   // ใช้ useContext ในการดึง authContext
@@ -70,7 +71,32 @@ function LoginModal({ lnShow, loginShow }) {
       setLoginError('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
     }
   };
-  
+
+  const handleForgotPassword = async () => {
+    if (!forgotPasswordEmail) {
+      setLoginError('กรุณากรอกอีเมล');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/forgot-password/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: forgotPasswordEmail }),
+      });
+
+      if (response.ok) {
+        setLoginError('คำขอลืมรหัสผ่านถูกส่งไปที่อีเมลแล้ว');
+      } else {
+        const errorData = await response.json();
+        setLoginError(errorData.detail || 'ไม่สามารถส่งคำขอลืมรหัสผ่านได้');
+      }
+    } catch (error) {
+      setLoginError('เกิดข้อผิดพลาดในการส่งคำขอลืมรหัสผ่าน');
+    }
+  };
 
   return (
     <Modal
@@ -108,6 +134,37 @@ function LoginModal({ lnShow, loginShow }) {
               onChange={handleChange}
             />
           </Form.Group>
+
+          {/* เพิ่มปุ่มลืมรหัสผ่าน */}
+          <div className="d-flex justify-content-between align-items-center mt-3">
+            <Button
+              variant="link"
+              style={{ padding: 0 }}
+              onClick={() => setForgotPasswordEmail(formData.username)}
+            >
+              ลืมรหัสผ่าน?
+            </Button>
+          </div>
+
+          {/* แสดงผลการลืมรหัสผ่าน */}
+          {forgotPasswordEmail && (
+            <Form.Group controlId="forgotPasswordEmail" className="mt-3">
+              <Form.Label>กรอกอีเมลเพื่อรับลิงก์รีเซ็ตรหัสผ่าน</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="กรอกอีเมลของคุณ"
+                value={forgotPasswordEmail}
+                onChange={(e) => setForgotPasswordEmail(e.target.value)}
+              />
+              <Button
+                variant="primary"
+                className="mt-2"
+                onClick={handleForgotPassword}
+              >
+                ส่งคำขอลืมรหัสผ่าน
+              </Button>
+            </Form.Group>
+          )}
         </Form>
         {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
       </Modal.Body>

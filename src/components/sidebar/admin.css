@@ -3,15 +3,18 @@
     top: 0; /* ตั้งค่าระยะห่างจากด้านบนของหน้าจอเป็น 0 */
     left: 0;
     width: 250px; /* กำหนดความกว้างของ Sidebar */
-    background-color: #e1bee7 !important; /* เปลี่ยนสีพื้นหลัง Sidebar */
+    background-color: #e7e7e7 !important; /* เปลี่ยนสีพื้นหลัง Sidebar */
     color: #ffffff !important; /* เปลี่ยนสีตัวอักษรใน Sidebar */
     padding: 0px 20px 20px 20px; /* เพิ่ม padding ด้านบนเพื่อเว้นระยะจากแถบด้านบน */
     z-index: 1000; /* นำ Sidebar ไว้บนสุด */
     font-family: 'Anuphan';
-    border-right: 2px solid #7A009F; /* เพิ่มเส้นขอบด้านขวา */
     height: 100vh; /* ใช้ความสูงเต็มหน้าจอ */
     overflow-y: auto; /* เพิ่มการ scroll เมื่อ Sidebar ยาวเกินหน้าจอ */
+
+    /* เพิ่มเงาแทนเส้นขอบ */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); 
 }
+
 
 .custom-sidebar .nav-link {
     color: #030303 !important; /* สีตัวอักษรปกติ */
