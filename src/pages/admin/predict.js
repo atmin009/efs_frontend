@@ -18,7 +18,7 @@ const AdminPredictPage = () => {
       <OtherNavMenu handleShow={handleShow} />
       
       <Container fluid className="p-0 content-wrap">
-        <div className="d-flex">
+        <div className="">
           <OtherSidebar show={show} handleClose={handleClose} />
           <div className="content-area">
             <ForecastComponent1 />
