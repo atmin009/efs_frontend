@@ -5,7 +5,7 @@
     width: 250px; /* กำหนดความกว้างของ Sidebar */
     background-color: #e1bee7 !important; /* เปลี่ยนสีพื้นหลัง Sidebar */
     color: #ffffff !important; /* เปลี่ยนสีตัวอักษรใน Sidebar */
-    padding: 80px 20px 20px 20px; /* เพิ่ม padding ด้านบนเพื่อเว้นระยะจากแถบด้านบน */
+    padding: 0px 20px 20px 20px; /* เพิ่ม padding ด้านบนเพื่อเว้นระยะจากแถบด้านบน */
     z-index: 1000; /* นำ Sidebar ไว้บนสุด */
     font-family: 'Anuphan';
     border-right: 2px solid #7A009F; /* เพิ่มเส้นขอบด้านขวา */

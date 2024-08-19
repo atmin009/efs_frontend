@@ -19,6 +19,7 @@ const AdminSidebar = ({ show, handleClose, handleShow }) => {
   <div className="text-center mb-4">
   </div>
   <Nav className="flex-column" style={{ fontFamily: "Anuphan" }}>
+    <img src="/logo/logo.png" alt="Logo" style={{ width: "100%", marginBottom: "20px" }} />
     <Nav.Link href="/admin">หน้าแรก</Nav.Link>
     <Nav.Link href="/admin/predict">การพยากรณ์ไฟฟ้า</Nav.Link>
     <NavDropdown title="จัดการข้อมูล" id="desktop-nav-dropdown">

@@ -23,9 +23,7 @@ const AdminNavMenu = ({ handleShow }) => {
             style={{ cursor: 'pointer', color: '#fff', fontSize: '20px' }}
             onClick={handleShow}
           />
-          <Navbar.Brand href="/" className="d-lg-flex d-none" style={{ color: '#fff', fontWeight: 'bold' }}>
-            ระบบการพยากรณ์การใช้ไฟฟ้า
-          </Navbar.Brand>
+
           <div className="d-flex align-items-center ms-auto">
             <span style={{ color: '#fff', marginRight: '5px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '120px' }}>
               {auth.user ? auth.user.name : 'ผู้ใช้'}
