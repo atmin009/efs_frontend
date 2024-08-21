@@ -50,7 +50,7 @@ const AdminSidebar = ({ show, handleClose, handleShow }) => {
             </NavDropdown.Item>
           </NavDropdown>
           
-          <Nav.Link href="#manageusers">
+          <Nav.Link href="/admin/users">
             <FaUserCog style={{ marginRight: "8px" }} />
             จัดการผู้ใช้งานระบบ
           </Nav.Link>
@@ -95,7 +95,7 @@ const AdminSidebar = ({ show, handleClose, handleShow }) => {
                 การสอบและเปิดปิดภาคเรียน
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#manageusers">
+            <Nav.Link href="/admin/users">
               <FaUserCog style={{ marginRight: "8px" }} />
               จัดการผู้ใช้งานระบบ
             </Nav.Link>

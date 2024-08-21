@@ -110,3 +110,24 @@
   background-color: #7A009F;
   color: #ffffff;
 }
+
+/* เปลี่ยนสีพื้นหลังของปุ่มที่ถูกเลือก */
+.page-item.active .page-link {
+  background-color: #4D0067;
+  border-color: #4D0067;
+}
+
+/* เปลี่ยนสีของตัวเลข */
+.page-item.active .page-link {
+  color: white;
+}
+
+/* เปลี่ยนสีปุ่มซ้ายและขวา */
+.page-link {
+  color: #4D0067;
+}
+
+.page-link:hover {
+  background-color: #e9ecef;
+  border-color: #4D0067;
+}
