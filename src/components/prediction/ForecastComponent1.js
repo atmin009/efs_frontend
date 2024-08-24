@@ -8,8 +8,17 @@ import "./Table.css";
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import highchartsDrilldown from 'highcharts/modules/drilldown';
+import ChartAandP from "./chartAandP";
 
 highchartsDrilldown(Highcharts);
+const getThaiMonthName = (monthNumber) => {
+  const thaiMonths = [
+    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", 
+    "พฤษภาคม", "มิถุนายน", "กรกฎาคม", 
+    "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+  ];
+  return thaiMonths[monthNumber - 1];  // Adjust index for 0-based array
+};
 
 const MonthlySumsTable = ({ data }) => {
   const monthlySums = useMemo(() => {
@@ -53,6 +62,7 @@ const ForecastComponent1 = () => {
   const [currentMonth, setCurrentMonth] = useState(null);
   const [showForecastButton, setShowForecastButton] = useState(false);
   const [chartOptions, setChartOptions] = useState({});
+  const [totalForecast, setTotalForecast] = useState(0);
 
   useEffect(() => {
     const fetchCurrentMonth = async () => {
@@ -81,6 +91,10 @@ const ForecastComponent1 = () => {
 
   useEffect(() => {
     if (data.length > 0) {
+      // Calculate total forecast
+      const total = data.reduce((sum, item) => sum + item.prediction, 0);
+      setTotalForecast(total);
+
       const seriesData = [];
       const drilldownSeries = [];
 
@@ -208,25 +222,6 @@ const ForecastComponent1 = () => {
     usePagination
   );
 
-  const processedData = useMemo(() => {
-    const monthlySums = {};
-
-    data.forEach((item) => {
-      const month = item.month_predict;
-      if (!monthlySums[month]) {
-        monthlySums[month] = 0;
-      }
-      monthlySums[month] += item.prediction;
-    });
-
-    return Object.entries(monthlySums)
-      .sort(([a], [b]) => parseInt(a) - parseInt(b))
-      .map(([month, sum]) => ({
-        month: `เดือน ${month}`,
-        sum: sum,
-      }));
-  }, [data]);
-
   return (
     <Container>
       <Form
@@ -245,6 +240,8 @@ const ForecastComponent1 = () => {
             </Form.Group>
           </Col>
 
+
+<ChartAandP/>
           <Col>
             <Form.Group controlId="monthSelect">
               <Form.Label>ข้อมูลปัจจุบันเดือน:</Form.Label>
@@ -274,6 +271,23 @@ const ForecastComponent1 = () => {
           )}
         </Row>
       </Form>
+
+      <Row className="mb-4">
+        <Col xs={12} md={6}>
+          <div className="blue-box info-box">
+            <div className="info-box-title">หน่วยการใช้ไฟฟ้ารวมเดือนล่าสุด</div>
+            <div>จำนวน ..... <span className="unit">Unit</span></div>
+          </div>
+        </Col>
+
+        <Col xs={12} md={6}>
+          <div className="orange-box info-box">
+<div className="info-box-title">
+  ค่าพยากรณ์ไฟฟ้าประจำเดือน {currentMonth ? `เดือน ${getThaiMonthName(currentMonth)}` : '...'}
+</div>            <div>จำนวน {totalForecast.toLocaleString('th-TH', { maximumFractionDigits: 2 })} <span className="unit">Unit</span></div>
+          </div>
+        </Col>
+      </Row>
 
       {loading && (
         <div className="d-flex justify-content-center">

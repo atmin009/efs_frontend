@@ -10,7 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import RegisterPage from "./pages/register";
 import AdminPredictPage from "./pages/admin/predict";
 import UserPage from "./pages/admin/userpage";
-
+import DataBuildingPage from "./pages/admin/dataBuildingPage";
 
 function AppRouter() {
   return (
@@ -45,7 +45,14 @@ function AppRouter() {
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="/admin/dataBuilding"
+            element={
+              <ProtectedRoute allowedStatus={[0]}>
+                <DataBuildingPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/employee"
             element={
