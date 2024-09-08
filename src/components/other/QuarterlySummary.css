@@ -1,0 +1,62 @@
+.container1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .quarter-box {
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    width: 250px;
+    text-align: center;
+    cursor: default; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+    -webkit-transition: transform 0.2s ease-in-out;
+    -moz-transition: transform 0.2s ease-in-out;
+    -ms-transition: transform 0.2s ease-in-out;
+    -o-transition: transform 0.2s ease-in-out;
+}
+  
+  .quarter-box.gray {
+    background: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .quarter-box:hover {
+    transform: scale(1.05);
+  }
+  
+  .quarter-key {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .quarter-amount {
+    color: #000;
+    font-size: 22px;
+  }
+  
+  .quarter-amount.gray {
+    color: #999;
+  }
+  
+  .quarter-title {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .q-margin{
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+  }
+
+  .bg1{
+    background-color: #81d1f6;
+
+  }

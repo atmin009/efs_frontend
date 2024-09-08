@@ -1,0 +1,53 @@
+/* ทำให้คอลัมน์สองฝั่งแบ่งอย่างเหมาะสม */
+.section2-container3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 0px; /* ระยะห่างระหว่างคอลัมน์ */
+}
+
+/* คอลัมน์สำหรับเนื้อหาและ Lottie */
+.section2-content3 {
+  flex: 1; /* ใช้พื้นที่ด้านซ้าย */
+  max-width: 800px;
+  color: black;
+  font-family: 'Anuphan', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: justify;
+  margin-left: 100px;
+}
+
+/* คอลัมน์สำหรับภาพ GIF */
+.section2-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; 
+}
+
+/* ตั้งค่า CSS ให้กับภาพ GIF ใหม่ */
+.new-image {
+  max-width: 100%; /* ทำให้ภาพมีขนาดพอดี */
+  height: 450px;
+}
+
+/* ปรับคอลัมน์ให้อยู่ในแนวตั้งเมื่อหน้าจอเล็กกว่า 768px */
+@media screen and (max-width: 768px) {
+  .section2-container3 {
+    flex-direction: column; /* เปลี่ยนเป็นแนวตั้ง */
+  }
+
+  .section2-content3 {
+    margin-left: 0px; /* เอา margin ซ้ายออกเมื่อหน้าจอเล็ก */
+  }
+
+  .section2-image {
+    margin-top: 20px; /* เพิ่มระยะห่างด้านบนให้กับภาพ */
+  }
+
+  .new-image {
+    height: auto; /* ปรับขนาดของภาพตามคอนเทนเนอร์ในหน้าจอเล็ก */
+  }
+}

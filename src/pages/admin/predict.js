@@ -1,5 +1,4 @@
-// AdminPredictPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import OtherSidebar from '../../components/sidebar/admin';
 import OtherNavMenu from '../../components/navmenu/adminNabmenu';
@@ -13,6 +12,14 @@ const AdminPredictPage = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // ตรวจสอบว่าฟังก์ชัน tos และ รีเซ มีการ import หรือไม่
+  // ถ้าไม่จำเป็นต้องใช้ฟังก์ชันนี้ สามารถลบ useEffect นี้ออกได้
+  useEffect(() => {
+    // ถ้าฟังก์ชัน tos และ รีเซ จำเป็นต้องใช้ ให้ import ฟังก์ชันนี้เข้ามา
+    // tos();
+    // รีเซ();
+  }, []);
+
   return (
     <div className="page-container">
       <OtherNavMenu handleShow={handleShow} />
@@ -22,6 +29,7 @@ const AdminPredictPage = () => {
           <OtherSidebar show={show} handleClose={handleClose} />
           <div className="content-area">
             <ForecastComponent1 />
+            
           </div>
         </div>
       </Container>
@@ -32,4 +40,3 @@ const AdminPredictPage = () => {
 };
 
 export default AdminPredictPage;
-

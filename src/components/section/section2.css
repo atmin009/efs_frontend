@@ -1,0 +1,43 @@
+.section2-container {
+    background-color: #e6e6e6; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; 
+    padding: 20px;
+  }
+  
+  .section2-content {
+    bottom: 0;
+    max-width: 800px; 
+    color: black;
+    font-family: 'Anuphan', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+  }
+  
+  
+
+  .section2-button {
+    margin-top: 20px;
+    background-color: #f5ac00;
+    border: 1px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .section2-button:hover {
+    background-color: #f5ac00; 
+  }
+  
+  /* ซ่อนภาพเมื่อหน้าจอเล็กกว่า 768px */
+  @media screen and (max-width: 768px) {
+    .section2-image {
+      display: none; /* ซ่อนภาพ */
+    }
+  }
+  

@@ -1,0 +1,96 @@
+/* จัดให้ตารางมีพื้นที่ว่างรอบขอบและเว้นระยะ */
+.table-container {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* จัดตำแหน่ง dropdown และปุ่มเพิ่มข้อมูลให้อยู่ในแถวเดียวกัน */
+  .filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* เว้นระยะห่างระหว่าง dropdowns */
+  .filter-container .dropdown {
+    margin-right: 10px;
+  }
+  
+  /* จัดตำแหน่งปุ่มเพิ่มข้อมูลให้เหมาะสม */
+  .filter-container button {
+    padding: 8px 16px;
+  }
+  
+  /* จัดระยะห่างและขนาดตัวอักษรในตาราง */
+  .table thead th {
+    background-color: #4D0067  ;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .table tbody td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  /* ปรับแต่งปุ่มแก้ไขและลบให้ดูโดดเด่น */
+  .table tbody .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+  
+  .table tbody .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  /* เพิ่มพื้นที่ว่างรอบ Modal */
+  .modal-body {
+    padding: 20px;
+  }
+  
+  /* จัดการขนาดของปุ่มใน Modal */
+  .modal-footer button {
+    padding: 8px 16px;
+  }
+  
+  /* เพิ่มการแสดงเงาเบา ๆ ให้กับตาราง */
+  .table {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .filter-dropdowns {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .filter-dropdowns .dropdown-button {
+    margin-right: 10px;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
+  /* สร้าง CSS class */
+.custom-dropdown-item {
+    background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลัง */
+    color: #333333; /* เปลี่ยนสีตัวอักษร */
+  }
+  
+  .custom-dropdown-item:hover {
+    background-color: #29002c; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+    color: #ffffff; /* เปลี่ยนสีตัวอักษรเมื่อ hover */
+  }
+  

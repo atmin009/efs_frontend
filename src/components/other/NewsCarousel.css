@@ -1,0 +1,87 @@
+.news-card {
+    background-color: #e4e4e4;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1; /* ทำให้การ์ดอยู่เหนือ */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: "Anuphan";
+  }
+  
+  .news-image img {
+    width: 100%;
+    height: 200px;  /* ขนาดภาพที่คงที่ */
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .news-title {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+  }
+  
+  .news-link {
+    text-decoration: none;
+    color: white;
+    display: block; /* ให้ลิงก์ครอบคลุมทั้งภาพและหัวข้อ */
+    z-index: 2; /* ลิงก์สามารถคลิกได้ */
+  }
+  
+  /* ปุ่มลูกศร */
+  .custom-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    z-index: 3;  /* ปุ่มลูกศรอยู่บนสุด */
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .custom-arrow:hover {
+    background-color: #d8d8d8;
+    transform: scale(1.1); /* ขยายขนาดเมื่อ hover */
+  }
+  
+  .arrow-icon {
+    color: white;
+    font-size: 24px;
+  }
+  
+  /* ลูกศรซ้าย */
+  .prev-arrow {
+    left: -60px;
+  }
+  
+  /* ลูกศรขวา */
+  .next-arrow {
+    right: -60px;
+  }
+  
+
+  h3{
+    font-family: "Anuphan";
+  }
+
+  .header1 {
+    display: flex;             
+    align-items: center;        
+  }
+  
+  .header1 {
+    margin-left: 10px;        
+  }
+  

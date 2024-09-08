@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import { InfinitySpin } from "react-loader-spinner";
 import "./Table.css";
 import { ResponsiveBar } from "@nivo/bar";
-
+import BASE_URL from "../../api";
 const MonthlySumsTable = ({ data }) => {
   const monthlySums = useMemo(() => {
     const sums = {};
@@ -53,7 +53,7 @@ const ForecastComponent2 = () => {
   const fetchDataAndCheckPredictions = async (year, month) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/check-predictions?year=${year}&month=${month}`
+        `${BASE_URL}/check-predictions?year=${year}&month=${month}`
       );
       if (response.data.length === 0) {
         await handleForecast(); // Forecast if no data found
@@ -68,7 +68,7 @@ const ForecastComponent2 = () => {
   useEffect(() => {
     const fetchCurrentMonth = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/current-month");
+        const response = await axios.get(`${BASE_URL}/current-month`);
         const { year, month } = response.data;
         setYear(year);
         setMonth(month);
@@ -89,7 +89,7 @@ const ForecastComponent2 = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/predict", {
+      const response = await axios.post("${BASE_URL}/predict", {
         year,
         month,
         modelName: "All", // Assuming default model name for automatic prediction

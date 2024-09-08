@@ -5,7 +5,7 @@ import { Container, Form, Button, Table, Row, Col } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import { InfinitySpin } from "react-loader-spinner";
 import "./Table.css";
-
+import BASE_URL from "../../api";
 const ForecastComponent = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ const ForecastComponent = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/predict", {
+      const response = await axios.post(`${BASE_URL}/predict`, {
         year,
         month,
         modelName,

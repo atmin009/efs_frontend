@@ -75,3 +75,23 @@
   }
 
   
+
+  .box-component{
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    margin-top: 20px;
+    margin-top: 20px;
+}
+.highcharts-xaxis-labels text {
+    text-decoration: none !important;
+    color: #000000 !important;
+  }
+  
+  /* สร้าง CSS class */

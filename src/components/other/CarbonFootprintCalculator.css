@@ -1,0 +1,117 @@
+.cloud-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cloud-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.month-number {
+    background-color: #064e00;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: bold;
+    position: absolute;
+    top: -13px;
+    z-index: 2;
+}
+
+.cloud {
+    width: 250px;
+    height: 130px;
+    background-image: url('/public/cloud.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+/* การซ้อนฟันปลา */
+.cloud-wrapper:nth-child(odd) {
+    margin-top: 50px;
+}
+
+.cloud-wrapper:nth-child(even) {
+    margin-top: 0px;
+}
+
+.cloud div {
+    font-size: 0.9em;
+}
+
+.highlight {
+    font-size: 2.0em;
+    color: #ff6347;
+    margin-top: -5px;
+    /* ลดระยะห่างด้านบน */
+}
+
+.unit-text {
+    font-size: 0.7em;
+    margin-top: 5px;
+    color: #000000e6;
+    /* สีเขียวเพื่อสื่อถึงต้นไม้ */
+
+}
+
+.trees-text {
+    font-size: 0.9em;
+    color: #228B22;
+    /* สีเขียวเพื่อสื่อถึงต้นไม้ */
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.my-component {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: url(/public/bg1.png), linear-gradient(to bottom, rgb(127, 208, 246), rgb(247, 242, 210));
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+
+.content {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Media Queries สำหรับหน้าจอขนาดเล็ก */
+@media (max-width: 768px) {
+    .content {
+        padding: 10px;
+    }
+}

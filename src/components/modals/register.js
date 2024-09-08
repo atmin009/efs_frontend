@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Container, Row, Col, Image } from 'react-bootstrap';
-
+import BASE_URL from '../../api';
 function RegisterComponent() {
   const [formData, setFormData] = useState({
     username: '',
@@ -92,7 +92,7 @@ function RegisterComponent() {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/members/', {
+      const response = await fetch(`${BASE_URL}/members/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

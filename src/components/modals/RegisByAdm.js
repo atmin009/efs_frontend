@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import './modal.css';
+import BASE_URL from "../../api";
 function RegisByAdm({ show, handleClose }) {
   const [formData, setFormData] = useState({
     username: "",
@@ -100,7 +101,7 @@ function RegisByAdm({ show, handleClose }) {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/members/", {
+      const response = await fetch(`${BASE_URL}/members/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

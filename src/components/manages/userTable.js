@@ -16,10 +16,13 @@ import {
   FaSort,
   FaSortUp,
   FaSortDown,
-  FaPlus 
+  FaPlus ,
+  
 } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import RegisByAdm from "../modals/RegisByAdm";
-
+import BASE_URL from "../../api";
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -47,16 +50,18 @@ const UserTable = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/members");
+        const response = await fetch(`${BASE_URL}/members`);
         if (response.ok) {
           const data = await response.json();
           setUsers(data);
           setFilteredUsers(data);
         } else {
           setError("Failed to fetch users");
+          toast.error("ไม่สามารถดึงข้อมูลผู้ใช้ได้");
         }
       } catch (error) {
         setError("Failed to fetch users");
+        toast.error("เกิดข้อผิดพลาดในการดึงข้อมูลผู้ใช้");
       } finally {
         setLoading(false);
       }
@@ -154,7 +159,7 @@ const UserTable = () => {
       };
 
       const response = await fetch(
-        `http://127.0.0.1:8000/members/${selectedUser.id}`,
+        `${BASE_URL}/members/${selectedUser.id}`,
         {
           method: "PUT",
           headers: {
@@ -171,13 +176,14 @@ const UserTable = () => {
             user.id === selectedUser.id ? { ...user, ...data } : user
           )
         );
+        toast.success("บันทึกข้อมูลสำเร็จ");
         setShowEditModal(false);
       } else {
         const errorData = await response.json();
-        alert("ไม่สามารถอัปเดตข้อมูลได้: " + JSON.stringify(errorData));
+        toast.error("ไม่สามารถอัปเดตข้อมูลได้: " + JSON.stringify(errorData));
       }
     } catch (error) {
-      alert("เกิดข้อผิดพลาดในการอัปเดตข้อมูล");
+      toast.error("เกิดข้อผิดพลาดในการอัปเดตข้อมูล");
     }
   };
 
@@ -186,7 +192,7 @@ const UserTable = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/members/${selectedUser.id}`,
+        `${BASE_URL}/members/${selectedUser.id}`,
         {
           method: "DELETE",
         }
@@ -194,12 +200,13 @@ const UserTable = () => {
 
       if (response.ok) {
         setUsers(users.filter((user) => user.id !== selectedUser.id));
+        toast.success("ลบข้อมูลสำเร็จ");
         setShowDeleteModal(false);
       } else {
-        alert("ไม่สามารถลบข้อมูลได้");
+        toast.error("ไม่สามารถลบข้อมูลได้");
       }
     } catch (error) {
-      alert("เกิดข้อผิดพลาดในการลบข้อมูล");
+      toast.error("เกิดข้อผิดพลาดในการลบข้อมูล");
     }
   };
 
@@ -217,33 +224,33 @@ const UserTable = () => {
 
   return (
     <div>
-<Row className="mb-3 d-flex justify-content-end">
-  <Col xs={12} md={6} className="d-flex justify-content-end">
-    <Form.Control
-      type="text"
-      placeholder="ค้นหา..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="me-2 w-50"
-    />
-    <Form.Control
-      as="select"
-      value={statusFilter}
-      onChange={(e) => setStatusFilter(e.target.value)}
-      className="me-2 w-25"
-    >
-      <option value="">สถานะทั้งหมด</option>
-      <option value="0">ผู้ดูแลระบบ</option>
-      <option value="1">เจ้าหน้าที่</option>
-      <option value="2">ผู้บริหาร</option>
-      <option value="3">ผู้ใช้ทั่วไป</option>
-    </Form.Control>
-    <Button onClick={handleShowModal}>
-      <FaPlus className="me-1" /> เพิ่มผู้ใช้
-    </Button>
-  </Col>
-</Row>
-
+      <ToastContainer />
+      <Row className="mb-3 d-flex justify-content-end">
+        <Col xs={12} md={6} className="d-flex justify-content-end">
+          <Form.Control
+            type="text"
+            placeholder="ค้นหา..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="me-2 w-50"
+          />
+          <Form.Control
+            as="select"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="me-2 w-25"
+          >
+            <option value="">สถานะทั้งหมด</option>
+            <option value="0">ผู้ดูแลระบบ</option>
+            <option value="1">เจ้าหน้าที่</option>
+            <option value="2">ผู้บริหาร</option>
+            <option value="3">ผู้ใช้ทั่วไป</option>
+          </Form.Control>
+          <Button onClick={handleShowModal}>
+            <FaPlus className="me-1" /> เพิ่มผู้ใช้
+          </Button>
+        </Col>
+      </Row>
 
       <RegisByAdm show={showModal} handleClose={handleCloseModal} />
 

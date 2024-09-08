@@ -1,0 +1,46 @@
+.middle-site-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: transparent; /* No background color for the container itself */
+    padding: 50px 20px;
+    height: 300px; /* Limit the height of the container */
+    position: relative; /* Positioning for the pseudo-element */
+    overflow: hidden; /* Hide overflow for the curved background */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  /* Curved background at the bottom */
+  .middle-site-container::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 200px;
+    background-color: #166080; /* Dark teal background for the curve */
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    bottom: -100px; /* Position at the bottom */
+    left: -10%;
+    z-index: 1;
+  }
+  
+  /* Individual card styles */
+  .card {
+    background-color: #e0e0e0; /* Light grey for contrast */
+    padding: 20px 30px; /* Adjust padding for the smaller size */
+    border-radius: 12px; /* Softer corners */
+    text-align: center;
+    font-size: 16px; /* Adjust font size */
+    font-family: 'Arial', sans-serif;
+    color: #333; /* Darker text color */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animation for hover */
+    z-index: 2; /* Ensure the card is above the curved background */
+  }
+  
+  /* Hover effect for cards */
+  .card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  }
+  

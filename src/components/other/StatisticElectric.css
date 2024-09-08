@@ -1,0 +1,49 @@
+.statistic-electric {
+    text-align: center;
+    font-family: 'Anuphan', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .electric-amount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #4D0067; /* สีม่วง */
+  }
+  
+  .digit {
+    background-color: #4D0067;
+    color: white;
+    padding: 10px;
+    margin: 0 2px;
+    border-radius: 5px;
+  }
+  
+  .unit {
+    margin-left: 10px;
+    font-size: 24px;
+    color: #4D0067;
+  }
+  
+  .texture-box {
+    width: 100px;
+    height: 120px;
+    background-color: #4B0082; /* สีม่วง */
+    border-radius: 20px; /* ทำให้ขอบโค้งมน */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* เงาใต้กล่อง */
+    position: relative;
+  }
+  
+  .texture-box::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.2); /* สีม่วงเข้มเพื่อให้ดูเป็นเงา */
+    border-radius: 20px 20px 0 0; /* ทำให้มุมบนโค้ง */
+  }
+  

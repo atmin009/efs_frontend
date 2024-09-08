@@ -83,3 +83,9 @@
       width: 100%; /* ให้ content-area ครอบคลุมเต็มพื้นที่ */
     }
   }
+
+
+
+  .bg1{
+    background-color: #81d1f6;
+  }

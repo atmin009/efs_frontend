@@ -4,6 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppRouter from './Router'; // ใช้ AppRouter เพื่อการนำทาง
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

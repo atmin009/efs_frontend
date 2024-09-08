@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-
+import BASE_URL from "../../api";
 const chartAandP = () => {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/forecast-data");
+        const response = await axios.get(`${BASE_URL}/forecast-data`);
         const data = response.data;
 
         // Extract the formatted month names (Thai month + year)
