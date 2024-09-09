@@ -4,7 +4,7 @@ import './footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer bg-dark text-white mt-5">
+    <footer className="footer bg-dark text-white">
       <Container>
         <Row className="text-center py-3"style={{fontFamily: 'Anuphan' }}>
           <Col>

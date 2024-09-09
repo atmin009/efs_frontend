@@ -98,7 +98,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding-bottom: 20px;
     flex-direction: column;
 }
 
@@ -114,4 +114,53 @@
     .content {
         padding: 10px;
     }
+    .my-component {
+        padding-top: 130px;
+        text-align: center;
+    }
+}
+/* สไตล์สำหรับ Dropdown */
+.dropdown-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center; /* จัดให้อยู่ในแนวเดียวกัน */
+    gap: 10px; /* เพิ่มช่องว่างระหว่างข้อความกับ dropdown */
+}
+
+.dropdown-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* ลูกศร dropdown */
+.dropdown-select::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+/* สไตล์สำหรับ Dropdown เมื่อถูก focus */
+.dropdown-select:focus {
+    border-color: #00aaff;
 }

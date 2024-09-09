@@ -137,6 +137,7 @@ const PredictionSummaryBoxes = () => {
   }
 
   return (
+    
     <BoxContainer>
       <SummaryBox bgColor="#e3f2fd">
         <BoxTitle>ค่าการพยากรณ์ราย เดือน</BoxTitle>

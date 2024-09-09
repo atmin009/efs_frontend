@@ -29,7 +29,7 @@ const ComparisonChart = () => {
 
         setChartOptions({
           title: {
-            text: 'ปริมาณการใช้งานไฟฟ้า (รายเดือน)',
+            text: 'เปรียบเทียบปริมาณการใช้ไฟฟ้าในอดีตและอนาคต',
             style: {
               fontSize: '18px',
               fontWeight: 'bold',

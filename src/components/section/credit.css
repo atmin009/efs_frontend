@@ -1,63 +1,67 @@
-/* Container หลัก */
 .credit-container {
-    text-align: center;
-    font-family: 'Anuphan', sans-serif;
-    color: black;
-    margin: 20px;
-    line-height: 1.8;
-  }
-  
-  /* สำหรับหัวเรื่อง */
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  /* จัดการชื่อคนที่ร่วมโครงการ */
-  .names-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px; /* ระยะห่างระหว่างชื่อ */
-    margin-bottom: 10px;
-  }
-  
-  /* สำหรับสไตล์ชื่อที่เป็นลิงก์ */
-  .name, .advisor {
-    background-color: #2d7a94; /* สีน้ำเงินเข้มสำหรับชื่อ */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 16px;
-    text-decoration: none; /* เอาขีดเส้นใต้ลิงก์ออก */
-    transition: background-color 0.3s ease; /* เพิ่มเอฟเฟกต์เวลา hover */
-    display: inline-block;
-  }
-  
-  /* เปลี่ยนสีเมื่อ hover ที่ชื่อ */
-  .name:hover {
-    background-color: #216a7a; /* เปลี่ยนสีเมื่อนำเมาส์ไปวาง */
-  }
-  
-  /* สำหรับ Advisor */
-  .advisor {
-    background-color: #8a2b82; /* สีม่วงเข้มสำหรับ Advisor */
-    padding: 10px 25px; /* เพิ่ม padding สำหรับ Advisor */
-  }
-  
-  /* เปลี่ยนสีเมื่อ hover ที่ Advisor */
-  .advisor:hover {
-    background-color: #702064;
-  }
-  
-  /* สำหรับข้อความธรรมดา */
-  p {
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  /* ลบขีดเส้นใต้เมื่อ hover */
-  a:hover {
-    text-decoration: none;
-  }
-  
+  text-align: center;
+  font-family: 'Anuphan', sans-serif;
+  color: black;
+  margin: 20px;
+  line-height: 1.8;
+}
+
+/* สำหรับหัวเรื่อง */
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* จัดการชื่อคนที่ร่วมโครงการในรูปแบบ Badge */
+.names-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px; /* ระยะห่างระหว่าง Badge */
+  margin-bottom: 10px;
+}
+
+/* สไตล์ Badge สำหรับแต่ละคน */
+.badge {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+/* สี Badge สำหรับ Blog */
+.badge-blog {
+  background-color: #d9534f; /* สีแดง */
+}
+.badge-blog:hover {
+  background-color: #c9302c;
+}
+
+/* สี Badge สำหรับ Portfolio */
+.badge-portfolio {
+  background-color: #f0ad4e; /* สีส้มอ่อน */
+}
+.badge-portfolio:hover {
+  background-color: #ec971f;
+}
+
+/* สี Badge สำหรับ Play Store */
+.badge-playstore {
+  background-color: #5cb85c; /* สีเขียว */
+}
+.badge-playstore:hover {
+  background-color: #4cae4c;
+}
+
+/* สี Badge สำหรับ Advisor */
+.badge-advisor {
+  background-color: #337ab7; /* สีน้ำเงิน */
+}
+.badge-advisor:hover {
+  background-color: #2e6da4;
+}
+.magin1{
+  margin-top: -10px;
+}

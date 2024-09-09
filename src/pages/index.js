@@ -7,6 +7,7 @@ import Section2 from '../components/section/section2';
 import StatisticElectric from '../components/other/statisticselectric';
 import Aboutsys from '../components/section/aboutsys';
 import Credit from '../components/section/credit';
+import Footer from '../components/section/footer';
 
 const HomePage = () => {
   const [lnShow, setLnShow] = useState(false);
@@ -25,6 +26,7 @@ const HomePage = () => {
 <StatisticElectric></StatisticElectric>
 <Aboutsys></Aboutsys>
 <Credit></Credit>
+<Footer></Footer>
     </div>
   );
 };

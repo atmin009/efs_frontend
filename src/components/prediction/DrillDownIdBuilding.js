@@ -36,7 +36,7 @@ const DrillDownIdBuilding = () => {
             type: "column"
           },
           title: {
-            text: "การพยากรณ์การใช้ไฟฟ้า แยกตามกลุ่มอาคาร"
+            text: "ค่าพยากรณ์ปริมาณการใช้ไฟฟ้าแยกตามกลุ่มอาคาร"
           },
           xAxis: {
             type: "category"

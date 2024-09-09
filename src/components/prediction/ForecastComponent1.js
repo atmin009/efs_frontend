@@ -324,7 +324,6 @@ const ForecastComponent1 = () => {
         <div className="hhh">
           <PredictionSummaryBoxes />
           <div className="box-component">
-            <ChartAandP />
           </div>
           <div className="box-component">
             <DrillDownChart />

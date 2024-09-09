@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CarbonFootprintCalculator.css";
 import BASE_URL from "../../api";
+
 // ฟังก์ชันแปลงเดือนเป็นภาษาไทย
 const getThaiMonth = (month) => {
   const months = [
@@ -24,6 +25,7 @@ const CarbonFootprintCalculator = () => {
   const [data, setData] = useState([]);
   const [footprint, setFootprint] = useState({});
   const [latestYear, setLatestYear] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null); // New state for dropdown
 
   const TREE_CO2_ABSORPTION = 10; // kg CO2e per tree per year
 
@@ -39,23 +41,25 @@ const CarbonFootprintCalculator = () => {
   }, []);
 
   useEffect(() => {
-    // Determine the latest year in the data
+    // Determine the available years in the data
     if (data.length) {
       const years = data.map((item) => item.years);
-      const maxYear = Math.max(...years);
+      const uniqueYears = [...new Set(years)];
+      const maxYear = Math.max(...uniqueYears);
       setLatestYear(maxYear);
+      setSelectedYear(maxYear); // Set default to latest year
     }
   }, [data]);
 
   useEffect(() => {
-    // Aggregate data and calculate carbon footprint
+    // Aggregate data and calculate carbon footprint for the selected year
     const calculateFootprint = () => {
       const monthlyData = {};
 
       data.forEach((item) => {
         const { years, month, amount } = item;
-        if (years === latestYear) {
-          // Filter data for the latest year
+        if (years === selectedYear) {
+          // Filter data for the selected year
           const key = `${month}`;
           if (!monthlyData[key]) {
             monthlyData[key] = { total: 0, footprint: 0 };
@@ -68,18 +72,42 @@ const CarbonFootprintCalculator = () => {
       setFootprint(monthlyData);
     };
 
-    if (data.length && latestYear !== null) {
+    if (data.length && selectedYear !== null) {
       calculateFootprint();
     }
-  }, [data, latestYear]);
+  }, [data, selectedYear]);
+
+  // Handle year change
+  const handleYearChange = (e) => {
+    setSelectedYear(parseInt(e.target.value));
+  };
 
   return (
-    <div >
+    <div>
       <div className="my-component">
+        <div className="dropdown-container">
+        <h6>กรุณาเลือกปี</h6>
+          <select
+            value={selectedYear || latestYear} // Use latestYear as default if selectedYear is null
+            onChange={handleYearChange}
+            className="dropdown-select"
+          >
+            {data
+              .map((item) => item.years) // Extract years
+              .filter((year, index, self) => self.indexOf(year) === index) // Ensure uniqueness
+              .sort((a, b) => b - a) // Sort years descending
+              .map((year) => (
+                <option key={year} value={year}>
+                  {year + 543} {/* Convert to Thai year */}
+                </option>
+              ))}
+          </select>
+        </div>
+
         <h1 style={{ fontFamily: "Anuphan", color: "#ff6347" }}>
           Carbon Footprint <span style={{ color: "black" }}>และ</span>{" "}
           <span style={{ color: "#228B22" }}>การปลูกต้นไม้ทดแทน</span>
-          <span style={{ color: "black" }}> ปี {latestYear + 543}</span>{" "}
+          <span style={{ color: "black" }}> ปี {selectedYear + 543}</span>{" "}
         </h1>
         <br />
         <div className="cloud-container content">
@@ -98,7 +126,7 @@ const CarbonFootprintCalculator = () => {
                       className="icon"
                       title="จำนวน unit ที่ใช้"
                     />
-                    {footprint[month].total.toLocaleString()}Unit{" "}
+                    {footprint[month].total.toLocaleString()} Unit
                   </div>
                 </div>
 

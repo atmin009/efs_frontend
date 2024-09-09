@@ -82,9 +82,9 @@ const NewsTable = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Actions</th>
+            <th>ลำดับที่</th>
+            <th>เรื่อง</th>
+            <th>การดำเนินการ</th>
           </tr>
         </thead>
         <tbody>
@@ -108,16 +108,16 @@ const NewsTable = () => {
       {/* Modal สำหรับดูข่าว */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>View News</Modal.Title>
+          <Modal.Title>รายละเอียด</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ fontFamily: 'Anuphan, sans-serif' }}>
           <h3>{selectedNews?.title}</h3>
           <div
             dangerouslySetInnerHTML={{ __html: selectedNews?.content }}  // ใช้แสดง HTML จาก CKEditor
           />
           {selectedNews?.cover_image && (
             <div className="mt-3">
-              <Form.Label>Cover Image</Form.Label>
+              <Form.Label>ภาพปกข่าว</Form.Label>
               <img
                 src={`${BASE_URL}/images/${selectedNews.cover_image}`}
                 alt="Cover"
@@ -136,15 +136,15 @@ const NewsTable = () => {
       {/* Modal ยืนยันการลบ */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Delete</Modal.Title>
+          <Modal.Title>ยืนยันการลบ</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this news?</Modal.Body>
+        <Modal.Body>คุณแน่ใจว่าต้องการลบข้อมูลที่เลือกหรือไม่</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-            Cancel
+            ยกเลิก
           </Button>
           <Button variant="danger" onClick={confirmDelete}>
-            Delete
+            ลบ
           </Button>
         </Modal.Footer>
       </Modal>
