@@ -317,7 +317,7 @@ const Building = () => {
               ชื่อ {getSortIcon("name")}
             </th>
             <th onClick={() => handleSort("area")}>
-              พื้นที่ {getSortIcon("area")}
+              พื้นที่ (ตร.ม.) {getSortIcon("area")}
             </th>
             <th onClick={() => handleSort("idGroup")}>
               รหัสกลุ่ม {getSortIcon("idGroup")}

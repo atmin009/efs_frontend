@@ -25,6 +25,16 @@ import NewsDetail from "./components/other/NewsDetail";
 import NewsCarousel from "./components/other/NewsCarousel";
 import NewsPages from "./pages/admin/NewsPage";
 import ManageNewsPages from "./pages/admin/ManageNews";
+import EmpUnitPage from "./pages/employee/UnitPage";
+import EmpSemesterStatusPage from "./pages/employee/SemesterStatusPage";
+import EmpGroupBuildingPage from "./pages/employee/GroupBuildingPage";
+import EmpBuildingPage from "./pages/employee/dataBuildingPage";
+import EmpExamstatusPage from "./pages/employee/ExamstatusPage";
+import EmpNumberOfUserPage from "./pages/employee/NumberOfUserPage";
+import EmpNewsPages from "./pages/employee/NewsPage";
+import EmpManageNewsPages from "./pages/employee/ManageNews";
+import EmpAddUnitPages from "./pages/employee/addunitPage";
+import EmpPredictPage from "./pages/employee/predict";
 function AppRouter() {
   return (
     <AuthProvider>
@@ -32,11 +42,14 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          />
           <Route path="/forget-password" element={<FoegetpasswordPage />} />
           <Route path="/p" element={<CreateNews />} />
           <Route path="/n" element={<NewsCarousel />} />
-        <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path="/news/:id" element={<NewsDetail />} />
           <Route
             path="/admin"
             element={
@@ -121,7 +134,7 @@ function AppRouter() {
           <Route
             path="/admin/dataAddUnit"
             element={
-              <ProtectedRoute allowedStatus={[0]}>
+              <ProtectedRoute allowedStatus={[0,1]}>
                 <AddUnitPages />
               </ProtectedRoute>
             }
@@ -142,6 +155,7 @@ function AppRouter() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/employee"
             element={
@@ -150,6 +164,95 @@ function AppRouter() {
               </ProtectedRoute>
             }
           />
+                    <Route
+            path="/employee/predict"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpPredictPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/clickpredict"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <Clickpredict />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/datauser"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpNumberOfUserPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/databuilding"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpBuildingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/databuilding-group"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpGroupBuildingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/dataSemester"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpSemesterStatusPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/dataExam"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpExamstatusPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/dataUnit"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpUnitPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/dataAddUnit"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpAddUnitPages />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/createnews"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpNewsPages />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/viewnews"
+            element={
+              <ProtectedRoute allowedStatus={[1]}>
+                <EmpManageNewsPages />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/ceo"
             element={

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Modal, Button, Table, Form, Pagination } from "react-bootstrap";
-import { FaEdit, FaTrashAlt, FaSort, FaSortUp, FaSortDown, FaPlus,FaFileExcel  } from "react-icons/fa";
+import { Modal, Button, Table, Form, Pagination, Dropdown } from "react-bootstrap";
+import { FaEdit, FaTrashAlt, FaSort, FaSortUp, FaSortDown, FaPlus, FaFileExcel } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom"; // Import the Link component
+import { Link } from "react-router-dom";
 import * as XLSX from 'xlsx';
 import BASE_URL from "../../api";
-const Unit = () => {
+
+const Unit = ({ link }) => {
+  const [originalUnitData, setOriginalUnitData] = useState([]);
   const [unitData, setUnitData] = useState([]);
   const [buildingMap, setBuildingMap] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -26,26 +28,15 @@ const Unit = () => {
     direction: "ascending",
   });
 
+  const [uniqueYears, setUniqueYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
+
   const thaiMonths = [
-    "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+    "ทั้งหมด", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
     "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
   ];
-  const exportToExcel = () => {
-    // สร้าง sheet ใหม่จากข้อมูล unitData
-    const worksheet = XLSX.utils.json_to_sheet(unitData.map(unit => ({
-      ปี: convertToBuddhistYear(unit.years),
-      เดือน: convertMonthToThai(unit.month),
-      จำนวน: unit.amount,
-      อาคาร: buildingMap[unit.idBuilding] || "ไม่ทราบชื่ออาคาร"
-    })));
 
-    // สร้าง workbook
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Units");
-
-    // สร้างไฟล์ excel และดาวน์โหลด
-    XLSX.writeFile(workbook, "UnitData.xlsx");
-  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -65,7 +56,11 @@ const Unit = () => {
         }));
 
         setBuildingMap(buildingMap);
+        setOriginalUnitData(unitsWithId);
         setUnitData(unitsWithId);
+
+        const years = [...new Set(unitsWithId.map(unit => convertToBuddhistYear(unit.years)))];
+        setUniqueYears(["ทั้งหมด", ...years.sort((a, b) => b - a)]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -77,12 +72,47 @@ const Unit = () => {
   const convertToBuddhistYear = (year) => parseInt(year) + 543;
 
   const convertMonthToThai = (month) => {
-    const thaiMonths = [
-      "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-      "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
-    ];
-    return thaiMonths[month - 1];
+    return thaiMonths[month];
   };
+
+  const handleYearSelect = (year) => {
+    setSelectedYear(year);
+    filterData(year === "ทั้งหมด" ? "" : year, selectedMonth === "ทั้งหมด" ? "" : selectedMonth);
+  };
+
+  const handleMonthSelect = (month) => {
+    setSelectedMonth(month);
+    filterData(selectedYear === "ทั้งหมด" ? "" : selectedYear, month === "ทั้งหมด" ? "" : month);
+  };
+
+  const filterData = (year, month) => {
+    let filteredData = [...originalUnitData];
+
+    if (year) {
+      filteredData = filteredData.filter(unit => convertToBuddhistYear(unit.years) === parseInt(year));
+    }
+
+    if (month) {
+      filteredData = filteredData.filter(unit => unit.month === parseInt(month));
+    }
+
+    setUnitData(filteredData);
+  };
+
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(unitData.map(unit => ({
+      ปี: convertToBuddhistYear(unit.years),
+      เดือน: convertMonthToThai(unit.month),
+      จำนวน: unit.amount,
+      อาคาร: buildingMap[unit.idBuilding] || "ไม่ทราบชื่ออาคาร"
+    })));
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Units");
+
+    XLSX.writeFile(workbook, "UnitData.xlsx");
+  };
+
   const handleShowModal = (type, unit = null) => {
     if (unit) {
       console.log("Selected Unit: ", unit);
@@ -91,7 +121,7 @@ const Unit = () => {
     setSelectedUnit(unit);
 
     if (type === "edit" && unit) {
-      setYears(convertToBuddhistYear(unit.years)); // แปลงปี ค.ศ. เป็น พ.ศ.
+      setYears(convertToBuddhistYear(unit.years));
       setMonth(unit.month);
       setAmount(unit.amount);
       setBuildingName(unit.idBuilding);
@@ -117,7 +147,7 @@ const Unit = () => {
   const handleAddUnit = async () => {
     try {
       const response = await axios.post(`${BASE_URL}/units/`, {
-        years: years - 543, // แปลงกลับจาก พ.ศ. เป็น ค.ศ.
+        years: years - 543,
         month,
         amount,
         idBuilding: buildingName,
@@ -125,6 +155,7 @@ const Unit = () => {
 
       if (response.data) {
         const fetchData = await axios.get(`${BASE_URL}/units/`);
+        setOriginalUnitData(fetchData.data);
         setUnitData(fetchData.data);
         handleCloseModal();
         toast.success("บันทึกข้อมูลสำเร็จ");
@@ -138,7 +169,7 @@ const Unit = () => {
   const handleEditUnit = async () => {
     try {
       const response = await axios.put(`${BASE_URL}/units/${selectedUnit.id}`, {
-        years: years - 543, // แปลงกลับจาก พ.ศ. เป็น ค.ศ.
+        years: years - 543,
         month,
         amount,
         idBuilding: buildingName,
@@ -146,6 +177,7 @@ const Unit = () => {
 
       if (response.data) {
         const fetchData = await axios.get(`${BASE_URL}/unit/`);
+        setOriginalUnitData(fetchData.data);
         setUnitData(fetchData.data);
         handleCloseModal();
         toast.success("บันทึกการแก้ไขสำเร็จ");
@@ -167,6 +199,7 @@ const Unit = () => {
       );
 
       const fetchData = await axios.get(`${BASE_URL}/units/`);
+      setOriginalUnitData(fetchData.data);
       setUnitData(fetchData.data);
       setSelectedUnits([]);
       handleCloseModal();
@@ -292,23 +325,51 @@ const Unit = () => {
 
   return (
     <div>
-      <div className="d-flex justify-content-end mb-3">
-        {selectedUnits.length > 1 && (
-          <Button variant="danger" onClick={() => setShowDeleteAllModal(true)}>
-            ลบทั้งหมด
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <div className="d-flex">
+          <Dropdown className="me-2">
+            <Dropdown.Toggle variant="secondary" id="dropdown-year">
+              {selectedYear ? `ปี ${selectedYear}` : "เลือกปี"}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {uniqueYears.map((year) => (
+                <Dropdown.Item key={year} onClick={() => handleYearSelect(year)}>
+                  {year}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown className="me-2">
+            <Dropdown.Toggle variant="secondary" id="dropdown-month">
+              {selectedMonth ? convertMonthToThai(selectedMonth) : "เลือกเดือน"}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {thaiMonths.map((month, index) => (
+                <Dropdown.Item key={index} onClick={() => handleMonthSelect(index)}>
+                  {month}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <div className="d-flex">
+          {selectedUnits.length > 1 && (
+            <Button variant="danger" onClick={() => setShowDeleteAllModal(true)} className="me-2">
+              ลบทั้งหมด
+            </Button>
+          )}
+          <Link to={ link } className="me-2">
+            <Button variant="primary">
+              <FaPlus className="me-1" />
+              เพิ่มข้อมูล
+            </Button>
+          </Link>
+          <Button variant="success" onClick={exportToExcel}>
+            <FaFileExcel className="me-1" /> ดาวน์โหลด Excel
           </Button>
-        )}
-       <Link to="/admin/dataAddUnit">
-  <Button variant="primary">
-    <FaPlus className="me-1" />
-    เพิ่มข้อมูล
-  </Button>
-  
-</Link>
-<Button variant="success" className="ms-2" onClick={exportToExcel}>
-          <FaFileExcel className="me-1" /> ดาวน์โหลด Excel
-        </Button>
+        </div>
       </div>
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -329,7 +390,6 @@ const Unit = () => {
               />
             </th>
             <th>#</th>
-
             <th onClick={() => handleSort("years")}>
               ปี {getSortIcon("years")}
             </th>
@@ -337,7 +397,7 @@ const Unit = () => {
               เดือน {getSortIcon("month")}
             </th>
             <th onClick={() => handleSort("amount")}>
-              จำนวน {getSortIcon("amount")}
+              จำนวน (Unit) {getSortIcon("amount")}
             </th>
             <th onClick={() => handleSort("buildingName")}>
               ชื่ออาคาร {getSortIcon("buildingName")}
@@ -416,7 +476,7 @@ const Unit = () => {
                   value={month}
                   onChange={(e) => setMonth(e.target.value)}
                 >
-                  {thaiMonths.map((monthName, index) => (
+                  {thaiMonths.slice(1).map((monthName, index) => (
                     <option key={index + 1} value={index + 1}>
                       {monthName}
                     </option>
@@ -424,7 +484,7 @@ const Unit = () => {
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="formAmount">
-                <Form.Label>จำนวน</Form.Label>
+                <Form.Label>จำนวน (Unit)</Form.Label>
                 <Form.Control
                   type="text"
                   value={amount}
@@ -468,7 +528,6 @@ const Unit = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* Modal สำหรับยืนยันการลบทั้งหมด */}
       <Modal show={showDeleteAllModal} onHide={() => setShowDeleteAllModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>ยืนยันการลบ</Modal.Title>

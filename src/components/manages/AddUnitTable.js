@@ -5,23 +5,37 @@ import { FaPlus, FaSave, FaTrashAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BASE_URL from "../../api";
+
 const AddUnitTable = () => {
   const [buildingData, setBuildingData] = useState([]);
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
-  const [unitData, setUnitData] = useState([
-    { idBuilding: "", amount: "" },
-    { idBuilding: "", amount: "" },
-    { idBuilding: "", amount: "" },
-    { idBuilding: "", amount: "" },
-    { idBuilding: "", amount: "" },
-  ]);
+  const [visibleBuildings, setVisibleBuildings] = useState(10); // เริ่มต้นแสดง 10 แถวแรก
+  const [year, setYear] = useState(() => sessionStorage.getItem("year") || ""); // โหลดจาก sessionStorage
+  const [month, setMonth] = useState(
+    () => sessionStorage.getItem("month") || ""
+  ); // โหลดจาก sessionStorage
+  const [unitData, setUnitData] = useState(() => {
+    const savedData = sessionStorage.getItem("unitData");
+    return savedData ? JSON.parse(savedData) : [];
+  });
 
+  // ดึงข้อมูลอาคารจาก API
   useEffect(() => {
     const fetchBuildingData = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/buildings/`);
+        console.log("Building data fetched:", response.data);
         setBuildingData(response.data);
+
+        // ตั้งค่าเริ่มต้นแสดง 10 อาคารแรกเมื่อดึงข้อมูลเสร็จ
+        if (!sessionStorage.getItem("unitData")) {
+          const initialUnitData = response.data
+            .slice(0, 10)
+            .map((building) => ({
+              idBuilding: building.id,
+              amount: "",
+            }));
+          setUnitData(initialUnitData);
+        }
       } catch (error) {
         console.error("Error fetching building data:", error);
       }
@@ -29,6 +43,17 @@ const AddUnitTable = () => {
 
     fetchBuildingData();
   }, []);
+
+  // บันทึก unitData, year, month ลงใน Session Storage ทุกครั้งที่มีการเปลี่ยนแปลง
+  useEffect(() => {
+    console.log("Unit data updated:", unitData);
+    sessionStorage.setItem("unitData", JSON.stringify(unitData));
+  }, [unitData]);
+
+  useEffect(() => {
+    sessionStorage.setItem("year", year);
+    sessionStorage.setItem("month", month);
+  }, [year, month]);
 
   const thaiMonths = [
     "มกราคม",
@@ -45,14 +70,21 @@ const AddUnitTable = () => {
     "ธันวาคม",
   ];
 
-  const handleAddRow = () => {
-    setUnitData([...unitData, { idBuilding: "", amount: "" }]);
-  };
-
   const handleInputChange = (index, field, value) => {
     const updatedData = [...unitData];
     updatedData[index][field] = value;
     setUnitData(updatedData);
+  };
+
+  const handleAddRow = () => {
+    // เพิ่มแถวใหม่โดยแสดงอาคารถัดไป
+    const nextBuilding = buildingData[unitData.length];
+    if (nextBuilding) {
+      setUnitData([...unitData, { idBuilding: nextBuilding.id, amount: "" }]);
+      setVisibleBuildings(visibleBuildings + 1); // เพิ่มจำนวนอาคารที่แสดง
+    } else {
+      toast.error("ไม่มีอาคารเพิ่มเติมให้แสดงแล้ว");
+    }
   };
 
   const handleDeleteRow = (index) => {
@@ -61,16 +93,37 @@ const AddUnitTable = () => {
   };
 
   const handleSave = async () => {
-    if (!year || !month || unitData.length === 0) {
-      toast.error("กรุณาระบุปี, เดือน และข้อมูลอย่างน้อยหนึ่งแถว");
+    // ตรวจสอบว่ากรอกข้อมูลครบทุกแถวและมีแถวทั้งหมดเท่ากับจำนวนอาคารก่อนบันทึก
+    const incompleteRows = unitData.some(
+      (unit) => !unit.amount || unit.amount === ""
+    );
+    if (incompleteRows || unitData.length < buildingData.length) {
+      toast.error("กรุณากรอกจำนวนให้ครบทุกแถวสำหรับทุกอาคารก่อนบันทึก");
       return;
     }
 
-    const invalidUnits = unitData.some(
-      (unit) => !unit.idBuilding || !unit.amount
-    );
-    if (invalidUnits) {
-      toast.error("กรุณากรอกข้อมูลอาคารและจำนวนให้ครบถ้วน");
+    if (!year || !month) {
+      toast.error("กรุณาระบุปี และเดือน");
+      return;
+    }
+
+    // ตรวจสอบว่ามีข้อมูลซ้ำในปีและเดือนนี้หรือไม่ (ปีและเดือนต้องตรงกันทั้งคู่)
+    try {
+      const existingData = await axios.get(
+        `${BASE_URL}/units?year=${year - 543}&month=${month}`
+      );
+      const duplicate = existingData.data.some(
+        (data) =>
+          data.years === year - 543 && data.month === parseInt(month, 10)
+      );
+
+      if (duplicate) {
+        toast.error("มีข้อมูลในเดือนและปีนี้อยู่แล้ว ไม่สามารถบันทึกซ้ำได้");
+        return;
+      }
+    } catch (error) {
+      console.error("Error checking for duplicate data:", error);
+      toast.error("เกิดข้อผิดพลาดในการตรวจสอบข้อมูลซ้ำ");
       return;
     }
 
@@ -87,7 +140,15 @@ const AddUnitTable = () => {
       await Promise.all(requests);
 
       toast.success("บันทึกข้อมูลสำเร็จ");
-      setUnitData([{ idBuilding: "", amount: "" }]); // ล้างข้อมูลหลังจากบันทึกสำเร็จ
+      sessionStorage.removeItem("unitData"); // ลบข้อมูลจาก Session Storage หลังบันทึกสำเร็จ
+      sessionStorage.removeItem("year");
+      sessionStorage.removeItem("month");
+      setUnitData(
+        buildingData
+          .slice(0, 10)
+          .map((building) => ({ idBuilding: building.id, amount: "" }))
+      ); // รีเซ็ตข้อมูลหลังบันทึก
+      setVisibleBuildings(10); // รีเซ็ตจำนวนแถวที่แสดงกลับเป็น 10
       setYear("");
       setMonth("");
     } catch (error) {
@@ -102,10 +163,16 @@ const AddUnitTable = () => {
         <Col>
           <Form.Group controlId="formYear">
             <Form.Label>ปี</Form.Label>
+
             <Form.Control
               type="text"
               value={year}
-              onChange={(e) => setYear(e.target.value)}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                if (/^\d{0,4}$/.test(inputValue)) {
+                  setYear(inputValue);
+                }
+              }}
               placeholder="กรอกปี (พ.ศ.)"
             />
           </Form.Group>
@@ -128,57 +195,63 @@ const AddUnitTable = () => {
           </Form.Group>
         </Col>
       </Row>
-      <br></br>
-      <hr></hr>
+      <br />
+      <hr />
       <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th style={{ width: "60%" }}>ชื่ออาคาร</th>
-      <th style={{ width: "20%" }}>จำนวน</th>
-      <th style={{ width: "20%" }}>การดำเนินการ</th>
-    </tr>
-  </thead>
-  <tbody>
-    {unitData.map((unit, index) => (
-      <tr key={index}>
-        <td>
-          <Form.Control
-            as="select"
-            value={unit.idBuilding}
-            onChange={(e) => handleInputChange(index, "idBuilding", e.target.value)}
-          >
-            <option value="">เลือกอาคาร</option>
-            {buildingData.map((building) => (
-              <option key={building.id} value={building.id}>
-                {building.name}
-              </option>
-            ))}
-          </Form.Control>
-        </td>
-        <td style={{ width: "150px" }}>
-          <Form.Control
-            type="number"
-            value={unit.amount}
-            onChange={(e) => handleInputChange(index, "amount", e.target.value)}
-            placeholder="กรอกจำนวน"
-          />
-        </td>
-        <td style={{ textAlign: "center" }}>
-          <Button variant="danger" onClick={() => handleDeleteRow(index)}>
-            <FaTrashAlt />
-          </Button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</Table>
+        <thead>
+          <tr>
+            <th style={{ width: "60%" }}>ชื่ออาคาร</th>
+            <th style={{ width: "20%" }}>จำนวน</th>
+            <th style={{ width: "20%" }}>การดำเนินการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          {buildingData.length > 0 ? (
+            unitData.slice(0, visibleBuildings).map((unit, index) => {
+              const building = buildingData.find(
+                (b) => b.id === unit.idBuilding
+              );
+              return (
+                <tr key={index}>
+                  <td>{building ? building.name : "ไม่พบข้อมูลอาคาร"}</td>
+                  <td style={{ width: "150px" }}>
+                    <Form.Control
+                      type="number"
+                      value={unit.amount}
+                      onChange={(e) =>
+                        handleInputChange(index, "amount", e.target.value)
+                      }
+                      placeholder="กรอกจำนวน"
+                    />
+                  </td>
+                  <td style={{ textAlign: "center" }}>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteRow(index)}
+                    >
+                      <FaTrashAlt />
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan="3" style={{ textAlign: "center" }}>
+                กำลังโหลดข้อมูล...
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </Table>
 
       <div className="d-flex justify-content-center mb-3">
-        <Button variant="success" onClick={handleAddRow} className="me-2">
-          <FaPlus className="me-1" />
-          เพิ่มแถวข้อมูล
-        </Button>
-
+        {unitData.length < buildingData.length && (
+          <Button variant="success" onClick={handleAddRow} className="me-2">
+            <FaPlus className="me-1" />
+            เพิ่มอาคาร
+          </Button>
+        )}
         <Button variant="primary" onClick={handleSave}>
           <FaSave className="me-1" />
           บันทึกข้อมูล

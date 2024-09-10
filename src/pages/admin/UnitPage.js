@@ -19,7 +19,7 @@ function UnitPage() {
       <div className="">
         <OtherSidebar show={show} handleClose={handleClose} />
         <div className="content-area">
-          <UnitTable />
+          <UnitTable link="/admin/dataAddUnit" />
         </div>
       </div>
     </Container>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
-import OtherSidebar from '../../components/sidebar/admin';
+import EmpSidebar from '../../components/sidebar/employee'
 import OtherNavMenu from '../../components/navmenu/adminNabmenu';
 import Footer from '../../components/footer';
 import './AdminPredictPage.css'; // เปลี่ยนชื่อไฟล์ CSS
 import CreateNews from '../../components/other/CreateNews';
 import NewsTable from '../../components/manages/news/NewsTable';
-function ManageNewsPages() {
+function EmpManageNewsPages() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -18,9 +18,9 @@ function ManageNewsPages() {
     
     <Container fluid className="p-0 content-wrap">
       <div className="">
-        <OtherSidebar show={show} handleClose={handleClose} />
+        <EmpSidebar show={show} handleClose={handleClose} />
         <div className="content-area">
-<NewsTable  link="/admin/createnews"></NewsTable>
+<NewsTable link="/employee/createnews"></NewsTable>
 </div>
       </div>
     </Container>
@@ -30,4 +30,4 @@ function ManageNewsPages() {
   );
 }
 
-export default ManageNewsPages;
+export default EmpManageNewsPages;

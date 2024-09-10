@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';  // ใช้สำหรับลิงก์
 import BASE_URL from '../../../api';
 
-const NewsTable = () => {
+const NewsTable = ({ link }) => {
   const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -71,7 +71,7 @@ const NewsTable = () => {
       <div className="d-flex justify-content-between align-items-center">
         <h3>ข่าวประชาสัมพันธ์/ประกาศ</h3>
         {/* ปุ่มสำหรับสร้างข่าวใหม่ */}
-        <Link to="/admin/createnews">
+        <Link to={link}>
           <Button variant="success">
             <FaPlus className="me-2" />
             สร้างข่าวใหม่

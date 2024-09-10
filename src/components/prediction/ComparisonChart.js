@@ -45,7 +45,7 @@ const ComparisonChart = () => {
           },
           yAxis: {
             title: {
-              text: 'ปริมาณการใช้งาน',  // เอาคำว่า (หน่วย) ออก
+              text: 'ปริมาณการใช้งาน (Unit)',  // เอาคำว่า (หน่วย) ออก
               style: {
                 fontSize: '14px',
               }

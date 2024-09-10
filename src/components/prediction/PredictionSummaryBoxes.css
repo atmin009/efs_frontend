@@ -1,0 +1,111 @@
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 20px;
+  }
+  
+  .summary-box {
+    border-radius: 12px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s ease;
+    min-height: 130px; /* ปรับลดความสูง */
+    margin-bottom: 20px;
+  }
+  
+  .summary-box:hover {
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .summary-box {
+      max-width: 100%;
+    }
+  }
+  
+  /* ป้ายแสดงจำนวนเดือน (ด้านบน) */
+  .time-label {
+    padding: 8px 20px;
+    border-radius: 24px 24px 0 0;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    color: #fff; /* Text color */
+  }
+  
+  /* แถบแสดงเดือนปี (มุมล่างขวา) */
+  .box-subtitle {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #fff; /* Text color */
+  }
+  
+  /* ตัวเลขการพยากรณ์ */
+  .box-value {
+    font-size: 32px; /* ปรับขนาดตัวเลข */
+    font-weight: bold;
+    margin: 30px 0 0 0; /* ปรับระยะห่างให้สมดุล */
+    color: #007bff; /* Default blue color */
+  }
+  
+  .box-value::after {
+    content: ' unit';
+    font-size: 14px;
+    color: #343a40;
+  }
+  
+  /* สีพื้นหลังของกล่องและสีที่ล้อกัน */
+  .box-bg-blue {
+    background-color: #e3f2fd;
+  }
+  
+  .box-bg-red {
+    background-color: #ffebee;
+  }
+  
+  .box-bg-green {
+    background-color: #e8f5e9;
+  }
+  
+  .box-bg-orange {
+    background-color: #fff3e0;
+  }
+  
+  /* ปรับสีที่ล้อกัน */
+  .time-label-blue, .box-subtitle-blue {
+    background-color: #007bff;
+  }
+  
+  .time-label-red, .box-subtitle-red {
+    background-color: #dc3545;
+  }
+  
+  .time-label-green, .box-subtitle-green {
+    background-color: #28a745;
+  }
+  
+  .time-label-orange, .box-subtitle-orange {
+    background-color: #fd7e14;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+  }
+  

@@ -220,7 +220,7 @@ const GroupBuilding = () => {
           <tr>
             <th>#</th>
             <th onClick={() => handleSort("name")}>
-              ชื่อ {getSortIcon("name")}
+              ชื่อกลุ่มอาคาร {getSortIcon("name")}
             </th>
             <th onClick={() => handleSort("about")}>
               รายละเอียด {getSortIcon("about")}
