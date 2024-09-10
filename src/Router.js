@@ -35,6 +35,10 @@ import EmpNewsPages from "./pages/employee/NewsPage";
 import EmpManageNewsPages from "./pages/employee/ManageNews";
 import EmpAddUnitPages from "./pages/employee/addunitPage";
 import EmpPredictPage from "./pages/employee/predict";
+import CeoPage from "./pages/ceo/index";
+import CeoPredictPage from "./pages/ceo/predict";
+import OtherPage1 from "./pages/other";
+import OtherPredictPage from "./pages/other/predict";
 function AppRouter() {
   return (
     <AuthProvider>
@@ -257,7 +261,15 @@ function AppRouter() {
             path="/ceo"
             element={
               <ProtectedRoute allowedStatus={[2]}>
-                <CEOPage />
+                <CeoPage />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path="/ceo/predict"
+            element={
+              <ProtectedRoute allowedStatus={[2]}>
+                <CeoPredictPage />
               </ProtectedRoute>
             }
           />
@@ -265,7 +277,15 @@ function AppRouter() {
             path="/other"
             element={
               <ProtectedRoute allowedStatus={[3]}>
-                <OtherPage />
+                <OtherPage1 />
+              </ProtectedRoute>
+            }
+          />
+                    <Route
+            path="/other/predict"
+            element={
+              <ProtectedRoute allowedStatus={[3]}>
+                <OtherPredictPage />
               </ProtectedRoute>
             }
           />

@@ -12,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 48px;
+  font-size: 40px;
   color: #4D0067; /* สีม่วง */
 }
 
@@ -26,7 +26,7 @@
 
 .unit {
   margin-left: 10px;
-  font-size: 24px;
+  font-size: 19px;
   color: #4D0067;
 }
 
@@ -77,16 +77,20 @@
   color: white;
   font-size: 2rem;
   cursor: pointer;
-  position: relative; /* เปลี่ยนจาก absolute เพื่อให้ไม่ถูกทับ */
-  width: 50px; /* ปรับขนาดให้เป็นวงกลม */
-  height: 50px;
-  border-radius: 50%; /* ทำให้เป็นวงกลม */
-  display: flex;
+  position: relative;
+  /*เปลี่ยนจากabsoluteเพื่อให้ไม่ถูกทับ*/width: 40px;
+  /*ปรับขนาดให้เป็นวงกลม*/height: 40px;
+  border-radius: 100%;
+  /*ทำให้เป็นวงกลม*/display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
-  z-index: 2;
-  margin: 0 10px; /* เพิ่มช่องว่างระหว่างปุ่มกับการ์ด */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  /*เพิ่มเงา*/z-index: 2;
+  margin: 0 10px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
 }
 
 .scroll-button:hover {

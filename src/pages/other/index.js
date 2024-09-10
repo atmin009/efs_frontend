@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-import CeoSidebar from "../../components/sidebar/ceo";
+import OtherSidebar from "../../components/sidebar/other1";
 import OtherNavMenu from "../../components/navmenu/adminNabmenu";
 import Footer from "../../components/footer";
 import "../admin/AdminPredictPage.css"; // เปลี่ยนชื่อไฟล์ CSS
 
 import CarbonFootprintCalculator from "../../components/other/CarbonFootprintCalculator ";
 import QuarterlySummary from "../../components/other/BuildingAmountSummary";
-function CeoPage() {
+function OtherPage() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,7 +19,7 @@ function CeoPage() {
 
       <Container fluid className="p-0 content-wrap">
         <div className="">
-          <CeoSidebar show={show} handleClose={handleClose} />
+          <OtherSidebar show={show} handleClose={handleClose} />
           <div className="content-area1">
             <div className="gb1">
               {" "}
@@ -35,4 +35,4 @@ function CeoPage() {
   );
 }
 
-export default CeoPage;
+export default OtherPage;
