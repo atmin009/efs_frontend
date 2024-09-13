@@ -24,10 +24,11 @@ const NewsCarousel = () => {
 
   const settings = {
     dots: true,
-    infinite: false,  // ไม่ทำซ้ำวนลูป
+    infinite: true,  // ไม่ทำซ้ำวนลูป
     speed: 500,
     slidesToShow: Math.min(newsList.length, 3),  // แสดงการ์ดตามจำนวนข่าวที่มีจริง (สูงสุด 3 ใบ)
     slidesToScroll: 1,
+    initialSlide: 0,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [

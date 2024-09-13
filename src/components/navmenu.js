@@ -13,7 +13,7 @@ function CollapsibleExample({ setLgShow, loginShow }) {
       }}
     >
       <Container>
-        <Navbar.Brand href="#home" style={{ color: "white" }}>
+        <Navbar.Brand href="/" style={{ color: "white" }}>
           ระบบการพยากรณ์การใช้ไฟฟ้า
         </Navbar.Brand>
         <Navbar.Toggle
@@ -39,6 +39,9 @@ function CollapsibleExample({ setLgShow, loginShow }) {
             </Nav.Link>
             <Nav.Link as={Link} to="#about" style={{ color: "white" }}>
               เกี่ยวกับเรา
+            </Nav.Link>
+            <Nav.Link as={Link} to="/knowhow" style={{ color: "white" }}>
+              คู่มือการใช้งานระบบ
             </Nav.Link>
           </Nav>
           <Nav>

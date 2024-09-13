@@ -39,6 +39,7 @@ import CeoPage from "./pages/ceo/index";
 import CeoPredictPage from "./pages/ceo/predict";
 import OtherPage1 from "./pages/other";
 import OtherPredictPage from "./pages/other/predict";
+import KnowHowPage from "./pages/KnowHowPage";
 function AppRouter() {
   return (
     <AuthProvider>
@@ -46,6 +47,8 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/knowhow" element={<KnowHowPage />} />
+
           <Route
             path="/reset-password/:id/:token"
             element={<ResetPassword />}
