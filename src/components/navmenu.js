@@ -37,9 +37,6 @@ function CollapsibleExample({ setLgShow, loginShow }) {
             <Nav.Link as={Link} to="/" style={{ color: "white" }}>
               หน้าแรก
             </Nav.Link>
-            <Nav.Link as={Link} to="#about" style={{ color: "white" }}>
-              เกี่ยวกับเรา
-            </Nav.Link>
             <Nav.Link as={Link} to="/knowhow" style={{ color: "white" }}>
               คู่มือการใช้งานระบบ
             </Nav.Link>
