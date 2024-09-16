@@ -1,6 +1,7 @@
 ![downloads]( https://img.shields.io/badge/framework-react-blue)
 ![badge](https://img.shields.io/badge/Language-javascript-green)
 ![coverage](https://img.shields.io/badge/recommend-after_loading_:_npm_install-brightgreen)
+[![YouTube Channel](https://img.shields.io/badge/YouTube-User_Manual-red)](https://www.youtube.com/playlist?list=PL8zWJ_x1KCtxJe8vBrPdKlLfM8yIL_c1s)
 
 # ระบบพยากรณ์การใช้ไฟฟ้า มหาวิทยาลัยวลัยลักษณ์
 ระบบพยากรณ์การใช้ไฟฟ้า มหาวิทยาลัยวลัยลักษณ์ ภายใต้การดำเนินโครงงานการพยากรณ์การใช้ไฟฟ้ารายเดือนของหน่วยการศึกษาโดยใช้เทคนิคการทำเหมืองข้อมูล กรณีศึกษา มหาวิทยาลัยวลัยลักษณ์ ซึ่งเป็นหนึ่งในโปรเจคจบของนักศึกษา หลักสูตรเทคโนโลยีสารสนเทศและนวัตกรรมดิจิตัล (เทคโนโลยีอัจฉริยะ ปัจจุบัน) สาขาวิชาเทคโนโลยีสารสนเทศ สำนักวิชาสารสนเทศศาสตร์ มหาวิทยาลัยวลัยลักษณ์ พัฒนาโดย
@@ -16,3 +17,6 @@
 - React Freamwork
 ### `Backend`
 - Fast API
+
+### `คู่มือการใช้งานระบบ`
+
